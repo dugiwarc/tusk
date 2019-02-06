@@ -1,3 +1,8 @@
+require('dotenv').config();
+
+
+var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+var geocodingClient = mbxGeocoding({ accessToken: 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg' });
 var express       = require('express');
 var router        = express.Router();
 var passport      = require('passport');
@@ -20,7 +25,16 @@ router.get("/register", function(req, res){
   res.render("register");
 });
 
-router.post("/register", function(req, res){
+router.post("/register",async function(req, res){
+
+      let response = await geocodingClient
+        .forwardGeocode({
+          query: req.body.location,
+          limit: 1
+        })
+        .send();
+  var coordinates = response.body.features[0].geometry.coordinates;
+  console.log(coordinates);
   // res.send("Signing you up");
   var newUser = new User({
     name: req.body.name,
@@ -28,16 +42,19 @@ router.post("/register", function(req, res){
     email: req.body.email,
     username: req.body.username,
     gender: req.body.gender,
+    coordinates: coordinates,
+    city: req.body.location
   });
   // if(req.body.adminCode === '1111'){
-  //   newUser.isAdmin = true;
-  // }
-  User.register(newUser, req.body.password, function(err, user){
-    if(err){
-      req.flash("error", "That didn't work.");
-      console.log(err);
-    }
-    passport.authenticate("local")(req, res, function(){
+    //   newUser.isAdmin = true;
+    // }
+    User.register(newUser, req.body.password,function(err, user){
+
+      if(err){
+        req.flash("error", "That didn't work.");
+        console.log(err);
+      }
+      passport.authenticate("local")(req, res, function(){
       req.flash("success", "Welcome to Tusk!");
       res.redirect("/favors");
     });

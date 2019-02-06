@@ -14,9 +14,12 @@ var express         = require('express'),
     Notification    = require('./models/notification'),
     socket          = require('socket.io'),
     flash           = require('connect-flash');
-    keyPublishable  = process.env.PUBLISHABLE_KEY;
-    keySecret       = process.env.SECRET_KEY;
-    stripe          = require('stripe')(keySecret);
+    keyPublishable  = process.env.PUBLISHABLE_KEY,
+    keySecret       = process.env.SECRET_KEY,
+    stripe          = require('stripe')(keySecret),
+    mbxGeocoding    = require('@mapbox/mapbox-sdk/services/geocoding'),
+    geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
+
 
 var userRoutes      = require('./routes/users'),
     favorRoutes     = require('./routes/favors'),

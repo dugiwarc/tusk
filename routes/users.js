@@ -1,3 +1,8 @@
+require('dotenv').config();
+
+
+var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+var geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
 var express       = require('express');
 var multer        = require('multer');
 var passport      = require('passport');

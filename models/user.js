@@ -8,6 +8,7 @@ var userSchema = new mongoose.Schema({
     default: false
   },
   email: String,
+  coordinates: Array,
   image: String,
   city: String,
   interested_city: String,
