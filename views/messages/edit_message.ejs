@@ -1,0 +1,10 @@
+<h1>Send a mesoooosage to <%= user.username %></h1>
+<a href="/">I changed my mind</a>
+<form action="/users/<%= user._id %>/messages/" method="post">
+  <input type="text" name="message[text]"  placeholder="text">
+  <button>Submit</button>
+</form>
+
+<h1>Start a conversation with</h1>
+
+<% include ../partials/footer %>

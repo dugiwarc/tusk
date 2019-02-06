@@ -1,0 +1,66 @@
+<% include ../partials/header %>
+
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+<!--Begin Checkout-->
+
+<div class="invoice">
+<h1>Invoice</h1>
+        <hr class="tr_head">
+          <div class="table_head">
+            <div>QTY</div>
+            <div class="item_desc">ITEM</div>
+            <div>PRICE</div>
+          </div>
+          <div class="table_head_main">
+            <div class="quantity">1</div>
+            <div class="item_desc_info">Small Favor</div>
+            <div>$<%= favor.price %></div>
+          </div>
+          <div class="table_head">
+            <div></div>
+            <div class="favor_details">"<%= favor.task %>"</div>
+            <div></div>
+          </div>
+        <hr class="tr_head_bottom">
+          <div class="table_bottom">
+          <div class="table_head">
+            <div></div>
+            <div id="total">Total</div>
+            <div id="item_price">$<%= favor.price %></div>
+          </div>
+          </div>
+          <div id="form">
+          <form action="/charge" method="POST">
+            <script 
+              src="//checkout.stripe.com/v2/checkout.js"
+              class="stripe-button"
+              data-key="<%= keyPublishable %>"
+              data-locale="auto"
+              data-description="Sample Charge"
+              data-amount="<%= favor.price * 100 %>">
+            </script>
+          </form>
+            <form action="/favors/<%= favor._id %>?_method=DELETE" method="post">
+             <button>Cancel</button>
+            </form>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
+
+<% include ../partials/footer %>

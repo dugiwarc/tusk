@@ -1,0 +1,15 @@
+<% include ../partials/header %> 
+
+<h1>Notifications</h1>
+
+<ul>
+	<% allNotifications.forEach(function(notification) { %>
+	<li>
+		<a href="/favors/<%= notification.favorId %>">
+			<%= notification.username %> created a new favor %>
+		</a>
+	</li>
+	<% }); %>
+</ul>
+
+<% include ../partials/footer %> 

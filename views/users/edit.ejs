@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+
+<h1>Edit <% user.name %>'s Profile</h1>
+<a href="/">I changed my mind</a>
+<form action="/users/<%= user._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+  <input type="text" name="user[name]"  value="<%= user.name %>">
+  <input type="text" name="user[surname]" value="<%= user.surname %>">
+  <input type="text" name="user[username]" value="<%= user.username %>">
+  <input type="text" name="user[city]" placeholder="add a city where you live">
+  <input type="file" id="image" name="image" accept="image/*">
+  <button>Submit</button>
+</form>
+
+<% include ../partials/footer %>

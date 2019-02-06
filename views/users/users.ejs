@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<a href="/"><p>Main Page</p></a>
+		<div class="search_bar">
+            <form action="/users" method="get" class="">
+                <input type="text" name="search" placeholder="User search...">
+                <input type="submit" value="search" class="button">
+            </form>
+        </div>
+<h1>This is the users catalog</h1>
+<% users.forEach(function(user){ %>
+<div class="">
+  <h4>
+    <%= user.name %>
+  </h4>
+  <h3>
+    <%= user.surname %>
+  </h3>
+  <p>
+
+    <a href="/users/<%= user._id %>">See User Profile</a>
+  </p>
+</div>
+<% }); %>
+
+<% include ../partials/footer %>

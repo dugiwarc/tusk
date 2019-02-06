@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    max-width: 450px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #354044;
+    font-size: 16px;
+}
+
+.contact_name {
+    margin-bottom: 20px;
+}
+
+h2,
+label {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #FDFEFF;
+}
+
+h2 {
+    width: 360px;
+    font-size: 4rem;
+}
+
+
+input {
+    max-width: 400px;
+    width: 80%;
+    height: 1.8rem;
+    border: 0;
+}
+
+textarea {
+    display: block;
+    max-width: 450px;
+    width: 80%;
+    height: 150px;
+    border: 0;
+    padding: 0;
+}
+
+button {
+    background-color: #98554F;
+    font-family: 'Open Sans', sans-serif;
+    max-width: 450px;
+    width: 80%;
+    border: 0;
+    color: #FDFEFF;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+button:hover {
+    transition: all 0.5s ease-in-out;
+    background-color: #FDFEFF;
+    color: #98554F;
+}

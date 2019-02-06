@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+<div class="current_conversation">
+  <h2>You and <a href="/users/<%= user.id %>"><%= user.username %></a></h2>
+<% message.forEach(function(message){%>
+  <% if(currentUser._id.equals(message.sender.id) && message.receiver.id.equals(user._id)) {%>
+      <p>You : <%= message.text %><p>
+  <%} %>
+  <% if(currentUser._id.equals(message.receiver.id) && message.sender.id.equals(user._id)) {%>  
+        <p><a href="/users/<%= message.sender.id %>"><%= message.sender.username %></a>: <%= message.text %> </p>
+  <%}%>
+<%});%>
+<h1>Send a message to <%= user.username %></h1>
+<a href="/">I changed my mind</a>
+<form action="/users/<%= user._id %>/messages" method="post">
+  <input type="text" name="message[text]"  placeholder="text">
+  <button>Submit</button>
+</form>
+</div>
+<% include ../partials/footer %>

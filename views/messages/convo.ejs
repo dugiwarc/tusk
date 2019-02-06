@@ -1,0 +1,178 @@
+<% include ../partials/header %>
+<h2>Hello</h2>
+<style>
+
+.container_chat{
+  width:400px;
+  display:block;
+  margin:0 auto;
+  box-shadow:0 2px 5px rgba(0,0,0,0.4);
+}
+.header{
+  padding:20px 20px 18px 20px;
+  background:#5FB471;
+  color:#fff;
+}
+.header h2{
+  font-size:16px;
+  line-height:15px;
+  display:inline-block;
+}
+.header a{
+  display:inline-block;
+  float:right;
+  background:#3d8b4e;
+  font-size:25px;
+  line-height:20px;
+  padding:3px 6px;
+  margin-top:-5px;
+  border-radius:2px;
+}
+.chat-box, .enter-message{
+  background:#ECECEC;
+  padding:0 20px;
+  color:#a1a1a1;
+}
+.chat-box .message-box{
+  padding:18px 0 10px;
+  clear:both;
+}
+.message-box .picture{
+  float:left;
+  width:50px;
+  display:block;
+  padding-right:10px;
+}
+.picture img{
+  width:43px;
+  height:48px;
+  border-radius:5px;
+}
+.picture span{
+  font-weight:bold;
+  font-size:12px;
+  clear:both;
+  display:block;
+  text-align:center;
+  margin-top:3px;
+}
+.message{
+  background:#fff;
+  display:inline-block;
+  padding:13px;
+  width:274px;
+  border-radius:2px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
+  position:relative;
+}
+.message:before{
+  content:"";
+  position:absolute;
+  display:block;
+  left:0;
+  border-right:6px solid #fff;
+  border-top: 6px solid transparent;
+  border-bottom:6px solid transparent;
+  top:10px;
+  margin-left:-6px;
+}
+.message span{
+  color:#555;
+  font-weight:bold;
+}
+.message p{
+  padding-top:5px;
+}
+.message-box.right-img .picture{
+  float:right;
+  padding:0;
+  padding-left:10px;
+}
+.message-box.right-img .picture img{
+  float:right;
+}
+.message-box.right-img .message:before{
+  left:100%;
+  margin-right:6px;
+  margin-left:0;
+  border-right:6px solid transparent;
+  border-left:6px solid #fff;
+  border-top: 6px solid transparent;
+  border-bottom:6px solid transparent;
+}
+.enter-message{
+  padding:13px 0px;
+}
+.enter-message input{
+  border:none;
+  padding:10px 12px;
+  background:#d3d3d3;
+  width:260px;
+  border-radius:2px;
+}
+.enter-message a.send{
+  padding:10px 15px;
+  background:#6294c2;
+  border-radius:2px;
+  float:right;
+}</style>
+
+
+<div class="container_chat">
+  <div class="header">
+  <% console.log(message);%>
+    
+    <a href="#" title="Add Friend to this chat">+</a>
+  </div>
+  <div class="chat-box">
+<% message.forEach(function(message){ %>
+<% if(message.receiver.id.equals(currentUser._id) && message.sender.id.equals(user._id)){ %>
+    <% console.log(currentUser._id) %>
+    <% console.log(user._id) %>
+    <% console.log("==================================================================================")%>
+    <div class="message-box left-img">
+      <div class="picture">
+        <img src="<%= currentUser.image %>" title="user name"/>
+        <span class="time"><%= message.createdAt.toDateString() %></span>
+      </div>
+      <div class="message">
+        <span><%= message.sender.username %></span>
+        <p><%= message.text %></p>
+      </div>
+    </div>
+
+
+<% } else if(message.sender.id.equals(currentUser._id) && message.receiver.id.equals(user._id)) { %>
+        <div class="message-box right-img">
+      <div class="picture">
+        <img src="<%= currentUser.image %>" title="user name"/>
+        <span class="time"><%= message.createdAt.toDateString() %></span>
+      </div>
+      <div class="message">
+        <span><%= message.sender.username %></span>
+        <p><%= message.text %></p>
+      </div>
+    </div>
+<% } %>
+<% }); %>
+    <div class="enter-message">
+<form action="/users/<%= user._id %>/messages" method="post">
+  <input type="text" name="message[text]"  placeholder="Enter your message..">
+  <button>Submit</button>
+</form>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function(){
+        
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+
+var yyyy = today.getFullYear();
+if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = mm+'/'+dd+'/'+yyyy;
+      });
+</script>
+<% include ../partials/footer %>

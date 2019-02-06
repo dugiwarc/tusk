@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+<h1>Edit FORM</h1>
+
+<h1>Edit <%= favor.task %></h1>
+<a href="/favors">I changed my mind</a>
+<form action="/favors/<%= favor._id %>?_method=PUT" method="post">
+  <input type="text" name="favor[task]"  value="<%= favor.task %>">
+  <input type="text" name="favor[price]" value="<%= favor.price %>">
+  <input type="text" name="favor[description]" value="<%= favor.description %>">
+  <button>Submit</button>
+</form>
+
+<% include ../partials/footer %>

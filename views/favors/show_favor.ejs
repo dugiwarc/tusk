@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<div class="show_favor_body">
+<% if(favor.author.id.equals(currentUser._id)){ %>
+<div class="favor_panel">
+  <a href="/favors/<%= favor._id %>/edit"><img src="../pics/edit.png"></a>
+  <form action="/favors/<%= favor._id %>?_method=DELETE" method="post">
+    <button><img src="../pics/delete_account.png"></button>
+  </form>
+</div>
+<% };%>
+
+<div class="show_favor">
+<div class="favor_task">
+  <%= favor.task %>
+</div>
+<hr>
+<div class="favor_description">
+<img src="../pics/favor.png">
+<hr class="lower_border">
+<p><%= favor.description %></p>
+<p>Put a bird on it gastropub cliche franzen lomo. Air plant godard butcher succulents, bushwick VHS thundercats tbh etsy pinterest whatever vegan lumbersexual pop-up. Salvia hammock 90's swag umami blue bottle cronut edison bulb raclette forage cloud bread letterpress vape scenester. Bushwick bicycle rights occupy vegan, truffaut asymmetrical chartreuse thundercats mumblecore chambray everyday carry butcher. Beard vaporware taiyaki fanny pack post-ironic mlkshk.</p>
+</div>
+<div class="redpill_bluepill">
+<div id="red_pill"><a href="/favors/<%= favor.id %>/interests" action="get">Show Interest</a></div>
+<div id="blue_pill"><a href="/negotiations" action="get">Negotiate</a></div>
+</div>
+<div class="favor_author">
+  <p>Posted by <a href="/users/<%= favor.author.id %>"><%= favor.author.username %></a><%= moment(favor.createdAt).fromNow() %> </p>
+</div>
+</div>
+</div>
+<% include ../partials/footer %>

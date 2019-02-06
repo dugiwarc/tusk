@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+
+<section id="my_favors">
+<% user.favors.forEach(function(favor){ %>
+<div class="admin_favor">
+<div class="favor_box" style="background-color: #<%= (Math.random()*0xFFFFFF<<0).toString(16) %>">
+  <h2>
+    <%= favor.task %>
+  </h2>
+    <a href="/favors/<%= favor._id %>">More Info</a>
+</div>
+<div class="stats_box">
+  <div>
+    <h3>Quick Stats</h3>
+  </div>
+</div>
+</div>
+<% }); %>
+</section>
+
+
+<% include ../partials/footer %>

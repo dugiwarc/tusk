@@ -1,0 +1,66 @@
+<% include ../partials/header %>
+		<div class="search_bar">
+            <form action="/users" method="get" class="">
+                <input type="text" name="search" placeholder="User search...">
+                <input type="submit" value="search" class="button">
+            </form>
+        </div>
+<h1><%= user.username %>'s Messages</h1>
+
+
+<hr>
+
+<% var lst = [] %>
+
+<% allusers.forEach(function(each_user){ %>
+  <% message.forEach(function(each_message){ %>
+    <% if(currentUser._id.equals(each_message.receiver.id) && each_user.equals(each_message.sender.id)){ %>
+      <% message.forEach(function(final_message){ %>
+
+        <% if(final_message.sender.equals(each_message.sender)){%>
+            <% lst.push(each_message.sender) %>
+        <% } %>
+      <% }); %>
+    <% } %>
+  <% }) %>
+<% }) %>
+
+<% function onlyUnique(value, index, self) {  %>
+<%    return self.indexOf(value) === index; %>
+<% } %>
+
+<% function removeDuplicates(originalArray, prop) { %>
+<%      var newArray = []; %>
+<%      var lookupObject  = {}; %>
+<% %>
+<%     for(var i in originalArray) { %>
+<%        lookupObject[originalArray[i][prop]] = originalArray[i]; %>
+<%     } %>
+<% %>
+<%     for(i in lookupObject) { %>
+<%         newArray.push(lookupObject[i]); %>
+<%     } %>
+<%      return newArray; %>
+<% } %>
+
+<% var a = removeDuplicates(lst, "id"); %>
+
+<% console.log(a) %>
+
+<% a.forEach(function(hombre){ %>
+  <p> Messages received from <%= hombre.username %> </p>
+  <% message.forEach(function(message){ %>
+  <% console.log(message)%>
+    <% if(message.sender.id.equals(hombre.id) && message.receiver.id.equals(currentUser._id)){%>
+      <p><%= message.text %></p>
+      <% } %>
+  <% }); %>
+<% }); %>
+
+<script>
+  
+</script>
+
+
+
+<% include ../partials/footer %>

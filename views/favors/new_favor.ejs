@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+
+  <% if(error && error.length > 0){ %>
+    <div class="warning">
+      <%= error %>
+    </div> 
+    <% } %>
+  <% if(success && success.length > 0){ %>
+  <div class="success">
+    <%= success %>
+  </div>
+  <% } %> 
+  <body>
+
+<div class="favor_container">  
+  <form id="favor_contact" action="/users/<%= user._id %>/favors" method="post" enctype="multipart/form-data">
+    <h3 id="fav_h3">Quick Favor</h3>
+    <fieldset>
+      <input placeholder="Your Task" type="text" name="favor[task]" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Upload an image" type="file" id="image" name="image" accept="image/*">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Your Price" type="text" name="favor[price]" min="0.0" tabindex="2" required>
+    </fieldset>
+      <textarea rows="2" name="favor[description]" placeholder="Auto expanding text area"></textarea>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+  </form>
+</div>
+
+<script>
+var textarea = document.querySelector('textarea');
+
+textarea.addEventListener('keydown', autosize);
+             
+function autosize(){
+  var el = this;
+  setTimeout(function(){
+    el.style.cssText = 'height:auto; padding:0';
+    // for box-sizing other than "content-box" use:
+    // el.style.cssText = '-moz-box-sizing:content-box';
+    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+  },0);
+}
+</script>
+
+<% include ../partials/footer %>

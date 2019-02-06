@@ -1,0 +1,187 @@
+<% include ../partials/header %>
+
+
+<div class='user_profile'>
+
+<% if((currentUser._id.equals(user._id))){ %>
+<div class='left-section'>
+  <a href="/users/<%= user._id %>/messages">
+    <img src="/pics/inbox.png">
+  </a>
+  <a href="/users/<%= user._id %>/favors/new">
+    <img src="/pics/new_favor.png">    
+  </a>
+  <a href="/users/<%= user._id %>/favors">
+    <img src="/pics/favors.png">
+  </a>
+  <a href="/users/<%= user._id %>/edit">
+    <img src="/pics/edit.png">
+  </a>
+  <form action="/users/<%= user._id %>?_method=DELETE" method="post">
+    <button class="btn-link"> 
+      <img src="/pics/delete_account.png">
+    </button>
+  </form> 
+</div>
+<%}%>
+
+
+
+<div class='middle-section'>
+  <div class="main-container">
+  <section class="bio">
+    <div class="profile-photo">
+      <div class='profile_img'> 
+        <img src="<%= user.image %>"  alt="prem" />
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="tiny-details">
+        <h4><%= user.name %> <%= user.surname %></h4>
+        <h5>Software Developer</h5>
+
+        <div class="location">
+          <a href="">
+          </a>
+          <h6>Strasbourg, France</h6>
+        </div>
+      </div>
+<% if(!(currentUser._id.equals(user._id))){ %>
+      <div class="social-links">
+
+        <div class="social-icons">
+          <a href="/follow/<%= user._id %>">
+            <img src="/pics/bookmark.png">
+          </a>
+         </div>
+        <div class="social-icons">
+          <a href="/users/<%= user._id %>/reviews/new">
+            <img src="/pics/review.png">
+          </a>
+        </div>
+
+        <div class="social-icons">
+          <a href="/users/<%= user._id %>/messages/new">
+            <img src="/pics/new_message.png">
+          </a>
+        </div>
+      </div>
+<% } %>
+      <div class="follow-details">
+        <div class="shots">
+
+          <p>
+            <a href="#">
+            Shots<span class="count"> 
+              <br />46</span>
+            </a>
+          </p>
+
+        </div>
+        <div class="Followers">
+
+          <p>
+            <a href="#">
+            Followers<span class="count"> <br />2,321</span>
+            </a>
+          </p>
+
+        </div>
+
+        <div class="Following">
+
+          <p>
+            <a href="#">
+            Following<span class="count">  <br />253</span>
+            </a>
+          </p>
+
+
+        </div>
+      </div>
+
+      <div class="description">
+                    <% if (user.rating === 0) { %>
+                    <h5>
+                        <em>No reviews yet.</em>
+                    </h5>
+                    <% } else { %>
+                    <p>Current user rating: <strong><%= user.rating.toFixed(2) %></strong></p>
+                    <p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star <% if (user.rating > 1.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (user.rating > 2.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (user.rating > 3.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (user.rating > 4.5) { %> checked <% } %>"></span>
+                        <em>(total reviews: <%= user.reviews.length %>)</em>
+                    </p>
+      </div>
+
+  </div>
+
+
+  </section>
+  <% if(!(currentUser._id.equals(user._id))){ %>
+  <div class="connect-me">
+    <div class="follow-me">
+      <a href="/follow/<%= user._id %>">
+      Follow Me
+      </a>
+    </div>
+    <div class="hire-me">
+        <p>
+  <form action="/users/<%= user._id %>/conversation/..." method="get">
+    <button class="btn-link">Message</button>
+  </form>
+  </p>
+    </div>
+  </div>
+  <%}%>
+</div>
+</div>
+                <div class="right-section">
+                <div class="user_reviews">
+                    <% user.reviews.slice(0, 5).forEach(function(review){ %>
+                    <div class="row">
+                    <div class="review_left_section">
+                        <div class="stars">
+                            <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="fa fa-star"></span>'.repeat(5 - review.rating) %>
+                        </div>
+                        <div class="review_left_text">Review by: <strong><%= review.author.username %></strong></div>
+                        <div class="review_left_text"><span><em><%= review.updatedAt.toDateString() %></em></span></div>
+                        </div>
+                        <div class="review_middle_section">
+                            <p>
+                                <%= review.text %>
+                            </p>
+                        </div>
+                    </div>               
+                        <div class="review_left_section">
+                            <% if(currentUser && review.author.id.equals(currentUser._id)){ %>
+                            <a href="/users/<%=user._id %>/reviews/<%=review._id %>/edit" class="button">Edit</a>
+                            <form id="delete-form" action="/users/<%=user._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
+                                <input type="submit" class="button" value="Delete">
+                            </form>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                    </div>
+                    <div class="button_see_all">
+                        <h4><a href="/users/<%= user._id %>/reviews">See all reviews</a></h4>
+                    </div>
+                    <% } %>
+                    <% if(!(currentUser && user._id.equals(currentUser._id))) { %>
+                    <div>
+
+                    </div>
+                            <% } %>
+                </div>
+            </div>
+    </div>
+</div>
+  </div>
+</body>
+
+
+<% include ../partials/footer %>

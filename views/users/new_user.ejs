@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<h1>Create a new user</h1>
+<a href="/">I changed my mind</a>
+<form action="/users" method="post">
+  <input type="email" name="user[email]" placeholder="email">  
+  <input type="text" name="user[username]" placeholder="username">
+  <button>Submit</button>
+
+</form>
+
+<% include ../partials/footer %>

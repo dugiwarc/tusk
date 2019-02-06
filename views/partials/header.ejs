@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <title>Tusk</title>
+
+    <link rel="stylesheet" href="/stylesheets/drumkit.css">
+    <link rel="stylesheet" href="/stylesheets/new_favors.css">
+    <link rel="stylesheet" href="/stylesheets/login_page.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/master.css">
+    <link rel="stylesheet" href="/stylesheets/test_show_user.css">
+    <link rel="stylesheet" href="/stylesheets/web_cam_fun.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Candal|Changa+One|Lilita+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:700i" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    <script src="/javascript/moment.js"></script>
+    <script src="/javascript/moment-timer.js"></script>
+
+  </head>
+  <nav class="nav">
+    <div class="dropdownBackground">
+      <span class="arrow"></span>
+    </div>
+
+    <ul class="cool">
+
+      <% if(!currentUser){ %>
+
+      <li>
+        <a href="/register"><img src="/pics/sign_up.png"></a>
+      </li> 
+      <li>
+        <a href="/login"><img src="/pics/login.png"></a>
+      </li>
+
+
+      <% } else { %>
+
+
+        <% if(notifications.length > 0 || message_notifications.length > 0 || interest_notifications.length > 0){ %>
+          <% console.log(interest_notifications)%>
+          <li class="trig"> 
+            <a><img src="/pics/full_inbox.png"></a>
+            <ul class="dropdown courses">
+          <% notifications.forEach(function(notification) { %>
+              <li>
+                <a href="/notifications/<%= notification.id %>"><%= notification.username %> created a favor </a>
+              </li>          
+          <% }); %>
+          <% message_notifications.forEach(function(message_notification) { %>
+              <li>
+                <a href="/message_notifications/<%= message_notification.id %>"><%= message_notification.username %> messaged you</a>
+              </li>
+          <% });%>
+          <% interest_notifications.forEach(function(interest_notification) { %>
+              <li>
+                <a href="/interest_notifications/<%= interest_notification.id %>"><%= interest_notification.username %> showed an interest</a>
+              </li>
+          <% });%>
+            </ul>
+          </li>
+
+        <% } else { %>
+
+          <li class="trig">
+            <a><img src="/pics/empty_inbox.png"></a>
+            <ul class="dropdown dropdown3">
+              <li>
+                <span class="code">No new notifications</span>
+                <a href="#"></a>
+              </li>
+              <li>
+                <a href="/notifications">View past notifications</a>
+              </li>          
+            </ul>
+          </li>
+
+        <% } %>
+            <li class="trig">
+            <% if(currentUser.gender == "M"){ %>
+                <a href="/users/<%= currentUser.id %>/"><img src="/pics/user_male.png"></a>
+              <% } else { %>
+                <a href="/users/<%= currentUser.id %>/"><img src="/pics/user_female.png"></a>
+              <% } %>
+                <ul class="dropdown dropwdown3">
+                  <li>
+                    <a href="">Edit Profile</a>
+                  </li>
+                  <li>
+                    <a href="">Posted Favors</a>
+                  </li>
+                </ul>
+            </li>
+        <% } %>
+      <li>  
+        <a href="/favors"><img src="/pics/favors.png"></a>
+      </li>
+
+
+      <li class="home">
+        <a href="/">
+          <h3>Tusk</h3>
+        </a>
+      </li>
+
+      <%if(currentUser){%>
+        <li>
+          <a href="/logout"><img src="/pics/log_out.png"></a>
+        </li>
+        <li>        
+          <a href="/chat"><img src="/pics/support.png"></a>
+        </li>
+        <li>
+          <a href="/faq"><img src="/pics/faq.png"></a>
+        </li>
+      <% } else { %>
+        <li>
+          <a href="/chat"><img src="/pics/support.png"></a>
+        </li>
+        <li>
+          <a href="/faq"><img src="/pics/faq.png"></a>
+        </li>
+        <li>
+          <a href="/faq"><img src="/pics/settings.png"></a>
+        </li>       
+      <% } %>
+        </ul>
+  </nav>
+
+  
+  <% if(error && error.length > 0){ %>
+    <div class="warning">
+      <%= error %>
+    </div> 
+    <% } %>
+  <% if(success && success.length > 0){ %>
+  <div class="success">
+    <%= success %>
+  </div>
+  <% } %> 
+  <body>
+
