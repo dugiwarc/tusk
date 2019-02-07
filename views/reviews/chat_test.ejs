@@ -1,43 +1,9 @@
+<% include ../partials/header %>
 
 <style>
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800);
 @import url(https://fonts.googleapis.com/css?family=Lobster);
-
-
-nav {
-  width:100%;
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 50px;
-}
-
-.home a {
-  font-family: 'Lobster';
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: -webkit-xxx-large;
-  background: black;
-  color: white;
-  width: 200px;
-  height: 100px;
-  	-webkit-box-shadow: 0 8px 6px -6px black;
-  	-moz-box-shadow: 0 8px 6px -6px black;
-  	box-shadow: 0 8px 6px -6px black;
-}
-
-img {
-  height: 45px;
-}
-
-a {
-  text-decoration: none;  
-}
-
-a img:hover {
-  transform: scale(.9);
-}
 
 body {
   display: flex;
@@ -124,34 +90,6 @@ textarea {
   transform: scale(.9);
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd
-}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
@@ -184,57 +122,7 @@ margin-bottom: 20px;
 
 </style>
 
-  <nav>
-    <div class='left_side'>
-        <% if(!currentUser){ %>
-            <a href="/register"><img src="/pics/sign_up.png"></a>
-            <a href="/login"><img src="/pics/login.png"></a>
-            <a href="/favors"><img src="/pics/favors.png"></a>
-        <% } else { %>
-            <div class="dropdown">
-            <a href="/favors"><img src="/pics/favors.png"></a>
-              <% if(notifications.length > 0 || message_notifications.length > 0){ %>
-              <button onclick="myFunction()" class="dropbtn"><img src="/pics/full_inbox.png"></button>
-              <% console.log(notifications.length); %>
-              <% } else { %>
-              <button onclick="myFunction()" class="dropbtn"><img src="/pics/empty_inbox.png"></button>
-              <% } %>
-              <div id="myDropdown" class="dropdown-content">
-        <% notifications.forEach(function(notification) { %>
-                <a href="/notifications/<%= notification.id %>"><%= notification.username %> created a favor </a>
-        <% });%>
-        <% message_notifications.forEach(function(message_notification) { %>
-                <a href="/message_notifications/<%= message_notification.id %>"><%= message_notification.username %> messaged you </a>
-        <% });%>
-                <a href="/notifications">View past notifications</a>    
-              </div>
-
-            
-            <% if(currentUser.gender == "M"){ %>
-                <a href="/users/<%= currentUser.id %>/"><img src="/pics/user_male.png"></a>
-              <% } else { %>
-                <a href="/users/<%= currentUser.id %>/"><img src="/pics/user_female.png"></a>
-              <% } %>
-        <% } %>
-     </div>
-     </div>
-     </div>
-      <div class="home">
-        <a href="/">
-          <h3>Tusk</h3>
-        </a>
-      </div>
-        <div class="right_side">
-        <%if(currentUser){%>
-          <a href="/logout"><img src="/pics/log_out.png"></a>        
-          <a href="/chat"><img src="/pics/support.png"></a>
-          <a href="/faq"><img src="/pics/faq.png"></a>
-          <% } else { %>
-          <a href="/chat"><img src="/pics/support.png"></a>
-          <a href="/faq"><img src="/pics/faq.png"></a>
-        </div>
-        <% } %>
-  </nav>
+  
       <h2>Let's talk</h2>
 <div class="contact_form">
 
@@ -249,7 +137,7 @@ margin-bottom: 20px;
        </div>
        <div>
          <label for="message">What can we help you with?*</label>
-         <textarea id="message" name="enquiry[message]" required></textarea>
+         <textarea id="textarea" name="enquiry[message]" required></textarea>
       </div>
         <button type="submit">Send</button>                   
       </form>

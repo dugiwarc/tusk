@@ -32,7 +32,7 @@
 }
 
 .marker {
-  background-image: url('../pics/mapbox-icon.png');
+  background-image: url('./pics/mapbox-icon.png');
   background-size: cover;
   width: 50px;
   height: 50px;
@@ -318,4 +318,33 @@ h6 {
     font-weight: lighter;
     opacity: 0.8;
     font-size: .8em;
+}
+
+
+@media only screen and (max-width: 1200px) {
+.user_profile
+{
+    flex-direction: column;
+}
+
+.left-section
+{
+    transform: rotate(90deg);
+    margin-top: -250px;
+}
+
+.left-section img
+{
+    transform: rotate(-90deg);
+}
+
+.main-container
+{
+    margin-top: -200px;
+}
+
+.right-section
+{
+    margin-top: -37px;
+}
 }

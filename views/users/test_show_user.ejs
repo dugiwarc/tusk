@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-
+<% if(currentUser){%>
 <div class='user_profile'>
 
   <% if((currentUser._id.equals(user._id))){ %>
@@ -89,20 +89,20 @@
 
         <div class="shots">
           <p>
-            <a href="#">Shots<span class="count"><br/>46</span></a>
+            <a href="#">Favors<span class="count"><br/><%= user.posted_favors.length%></span></a>
           </p>
         </div>
   
         <div class="Followers">
           <p>
-            <a href="#">Followers<span class="count"><br/>2,321</span>
+            <a href="#">Followers<span class="count"><br/><%= user.followers.length%></span>
             </a>
           </p>
         </div>
 
         <div class="Following">
           <p>
-            <a href="#">Following<span class="count"><br/>253</span>
+            <a href="#">Interests<span class="count"><br/><%= user.interests.length%></span>
             </a>
           </p>
         </div>
@@ -110,24 +110,23 @@
       </div>
 
       <div class="description">
-                    <% if (user.rating === 0) { %>
-                    <h5>
-                        <em>No reviews yet.</em>
-                    </h5>
-                    <% } else { %>
-                    <p>Current user rating: <strong><%= user.rating.toFixed(2) %></strong></p>
-                    <p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star <% if (user.rating > 1.5) { %> checked <% } %>"></span>
-                        <span class="fa fa-star <% if (user.rating > 2.5) { %> checked <% } %>"></span>
-                        <span class="fa fa-star <% if (user.rating > 3.5) { %> checked <% } %>"></span>
-                        <span class="fa fa-star <% if (user.rating > 4.5) { %> checked <% } %>"></span>
-                        <em>(total reviews: <%= user.reviews.length %>)</em>
-                    </p>
+        <% if (user.rating === 0) { %>
+          <h5>
+            <em>No reviews yet.</em>
+          </h5>
+        <% } else { %>
+        <p>Current user rating: <strong><%= user.rating.toFixed(2) %></strong></p>
+          <p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star <% if (user.rating > 1.5) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (user.rating > 2.5) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (user.rating > 3.5) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if (user.rating > 4.5) { %> checked <% } %>"></span>
+            <em>(total reviews: <%= user.reviews.length %>)</em>
+          </p>
       </div>
 
-  </div>
-  </section>
+    </div>
 
 
 
@@ -197,49 +196,31 @@
 
 <script>
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg';
-var user = <%- JSON.stringify(user) %>
-console.log(user);
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/dugiwarc/cjrtac8pe410f2so52fsbumkh',
-  center: user.coordinates,
-  zoom: 12
-});
+  var user = <%- JSON.stringify(user) %>;
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/dugiwarc/cjrtac8pe410f2so52fsbumkh',
+    center: user.coordinates,
+    zoom: 12
+  });
 
-geojson.features.forEach(function(marker) {
+  var el = document.createElement('div');
+  el.className = 'marker';
 
-  // create a HTML element for each feature
-  // var el = document.createElement('div');
-  // el.className = 'marker';
-
-  // make a marker for each feature and add to the map
   new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
+    .setLngLat(user.coordinates)
     .setPopup(new mapboxgl.Popup({offset: 25})
-    .setHTML('<h3>' + marker.properties.title + '</h3></p>' + marker.properties.description + '</p>'))
+    .setHTML('<h3>' + user.username + '</h3></p>' + user.location + '</p>'))
     .addTo(map);
-});
 
 </script>
-
+<% } else { %>
+  <div class="success">
+    You need to log in to view this page
+  </div>
+<% } %>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
-
 
 <% include ../partials/footer %>

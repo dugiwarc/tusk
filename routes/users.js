@@ -2,7 +2,7 @@ require('dotenv').config();
 
 
 var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-var geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
+var geocodingClient = mbxGeocoding({ accessToken: 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg' });
 var express       = require('express');
 var multer        = require('multer');
 var passport      = require('passport');
@@ -71,7 +71,6 @@ router.post("/users", function(req, res){
       console.log(err);
     } else {
       console.log("User created");
-      console.log(newUser);
       res.redirect("/users");
     }
   });
@@ -90,25 +89,53 @@ router.get("/users/:id/edit", middleware.checkUserOwnership, function(req, res){
 
 
 // update user profile
-router.put("/users/:id", middleware.checkUserOwnership, upload.single('image'), function (req, res) {
-    if(req.file){
+router.put("/users/:id", middleware.checkUserOwnership, upload.single('image'),function (req, res) {
+
+  if(req.file){
     cloudinary.uploader.upload(req.file.path, function (result) {
-    // add cloudinary url for the image to the campground object under image property
-    req.body.user.image = result.secure_url;
-    // add author to campground
-    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updateUser){
+      // add cloudinary url for the image to the campground object under image property
+      req.body.user.image = result.secure_url;
+      // add author to campground
+      User.findById(req.params.id, async function(err, updateUser){
       if(err){
         res.redirect("/users");
       } else {
+        let response = await geocodingClient
+          .forwardGeocode({
+            query: req.body.user.city,
+            limit: 1
+          })
+          .send();
+        var coordinates = response.body.features[0].geometry.coordinates;
+        updateUser.image = req.body.user.image;
+        updateUser.name = req.body.user.name;
+        updateUser.surname = req.body.user.surname;
+        updateUser.username = req.body.user.username;
+        updateUser.city = req.body.user.city;
+        updateUser.coordinates = coordinates;
+        updateUser.save();
         res.redirect("/users/" + req.params.id);
       }
     });
     });
   } else {
-          User.findByIdAndUpdate(req.params.id, req.body.user, function (err, updateUser) {
+          User.findById(req.params.id,async function (err, updateUser) {
             if (err) {
               res.redirect("/users");
             } else {
+              let response = await geocodingClient
+                .forwardGeocode({
+                  query: req.body.user.city,
+                  limit: 1
+                })
+                .send();
+              var coordinates = response.body.features[0].geometry.coordinates;
+              updateUser.name = req.body.user.name;
+              updateUser.surname = req.body.user.surname;
+              updateUser.username = req.body.user.username;  
+              updateUser.city = req.body.user.city;
+              updateUser.coordinates = coordinates;
+              updateUser.save();
               res.redirect("/users/" + req.params.id);
             }
           });
