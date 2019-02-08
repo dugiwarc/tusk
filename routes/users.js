@@ -218,7 +218,7 @@ router.get('/message_notifications/:id', middleware.isLoggedIn, async function (
     let notification = await Notification.findById(req.params.id);
     notification.isRead = true;
     notification.save();
-    res.redirect(`/users/${notification.messageId}/messages/new`);
+    res.redirect(`/users/${notification.messageId}/messages`);
   } catch (err) {
     req.flash('error', err.message);
     res.redirect('back');

@@ -276,19 +276,23 @@ margin-bottom: -17px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 15px;
+  margin-left: 15px;
 }
 
 .row {
-  display: flex;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+    margin-top: 20px;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: -2px;
 }
 .user_reviews {
-  flex: 0 0 80%;
-  display: flex;
-  flex-direction: column;
-  width: 90%;
+    flex: 0 0 80%;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-height: 122px;
+    overflow: auto;
 }
 
 .button {
@@ -308,11 +312,14 @@ margin-bottom: -17px;
 }
 
 .review_middle_section {
-flex: 0 0 77%;
-min-height: 50px;
-background-color: #303030;
-word-wrap: break-word;
-overflow: auto;
+    flex: 0 0 77%;
+    min-height: 50px;
+    background-color: #303030;
+    word-wrap: break-word;
+    overflow: auto;
+    /* width: 95%; */
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .review_middle_section p{

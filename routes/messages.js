@@ -45,7 +45,7 @@ router.post("/users/:id/messages", function (req, res) {
                     message.save();
                     user.messages.push(message);
                     user.save();
-                    res.redirect("/users/" + req.params.id + "/messages/new");
+                    res.redirect("/users/" + req.params.id + "/messages");
                 }
             });
             // Conversation.create()

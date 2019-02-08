@@ -50,8 +50,13 @@
         <% if((message.sender.id.equals(hombre.id) && message.receiver.id.equals(currentUser._id)) || (message.sender.id.equals(currentUser._id) && message.receiver.id.equals(hombre.id))){ %>
           <li><%= message.text %></li>
         <% } %>
-    <% }); %>
-  </ul>
+        <% }); %>
+        <li>        <form action="/users/<%= hombre.id %>/messages" method="post">
+        <input type="text" name="message[text]"  placeholder="text">
+        <button>Submit</button>
+      </form></li>
+        </ul>
+
 <% }); %>
 </div>
 <div class="m_chat">
@@ -75,14 +80,17 @@
 
   // messages.forEach(trigger => trigger.addEventListener('click', fn_click));
 
-
+<body onload="myFunction()">
   $('body').on('click', '.message', function() {
     $('.list2').empty();
     $(this).addClass('selected');
-    $('.list2').append($('.selected > li'));
+    // $('.list2').append($('.selected > li'));
+    $(".selected > li")
+      .clone()
+      .appendTo(".list2");
     // $('.selected').append($('.list2 > li'));
-    setTimeout(()=>{ $('.selected').append($('.list2 > li')); $(this).removeClass('selected'); }, 1000);
-    // $(this).removeClass('selected');
+    // setTimeout(()=>{ $('.selected').append($('.list2 > li')); $(this).removeClass('selected'); }, 1000);
+    $(this).removeClass('selected');
 });
 </script>
 

@@ -10,9 +10,9 @@ html {
 /* optional: show position indicator in red */
 
 #map {
-  margin-top: 3rem;
-  width: 100%;
+  width: 95%;
   height: 300px;
+  order: -1;
 }
 
 .right_side a {
@@ -123,13 +123,11 @@ ul
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-    border-style: solid;
-    width: 564px;
-    height: 526px;
+    width: 500px;
+    height: 530px;
     margin-left: 10px;
     background-color: rgb(37, 37, 37);
     border-color: black;
-    border-width: thin;
 }
 
 
