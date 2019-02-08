@@ -120,6 +120,8 @@ app.post('/charge', function (req, res) {
     .then(charge => res.render('charge'));
 });
 
-app.listen(process.env.PORT || 3000, process.env.IP, function(){
-  console.log("The Tusk Server has started...");
+var port = process.env.PORT || 8000;
+
+app.listen(port, function () {
+  console.log("App is running on port " + port);
 });
