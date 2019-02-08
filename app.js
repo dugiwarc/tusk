@@ -13,7 +13,7 @@ var express         = require('express'),
     Conversation    = require('./models/conversation'),
     Notification    = require('./models/notification'),
     socket          = require('socket.io'),
-    flash           = require('connect-flash');
+    flash           = require('connect-flash'),
     keyPublishable  = process.env.PUBLISHABLE_KEY,
     keySecret       = process.env.SECRET_KEY,
     stripe          = require('stripe')(keySecret),
@@ -31,7 +31,8 @@ var userRoutes      = require('./routes/users'),
 
 var app = express();
 
-mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
+// mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
+mongodb://tomoshimi:3ZZkgf8hcFcfjBL@ds159624.mlab.com:59624/shop_app
 
 // a line we will see all the time
 app.use(bodyParser.urlencoded({extended: true}));
