@@ -120,8 +120,9 @@ app.post('/charge', function (req, res) {
     .then(charge => res.render('charge'));
 });
 
-var port = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, function () {
+
+app.listen(PORT, function () {
   console.log("App is running on port " + port);
 });
