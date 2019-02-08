@@ -4,11 +4,8 @@
                 <input type="text" name="search" placeholder="User search...">
                 <input type="submit" value="search" class="button">
             </form>
-        </div>
-<h1><%= user.username %>'s Messages</h1>
-
-
-<hr>
+            <h1>My messages</h1>
+    </div>
 
 <% var lst = [] %>
 
@@ -45,21 +42,50 @@
 
 <% var a = removeDuplicates(lst, "id"); %>
 
-<% console.log(a) %>
-
+<div class="m_window">
+<div class="m_contacts">
 <% a.forEach(function(hombre){ %>
-  <p> Messages received from <%= hombre.username %> </p>
-  <% message.forEach(function(message){ %>
-  <% console.log(message)%>
-    <% if(message.sender.id.equals(hombre.id) && message.receiver.id.equals(currentUser._id)){%>
-      <p><%= message.text %></p>
-      <% } %>
-  <% }); %>
+  <ul class="message">Messages received from <%= hombre.username %>
+    <% message.forEach(function(message){ %>
+        <% if((message.sender.id.equals(hombre.id) && message.receiver.id.equals(currentUser._id)) || (message.sender.id.equals(currentUser._id) && message.receiver.id.equals(hombre.id))){ %>
+          <li><%= message.text %></li>
+        <% } %>
+    <% }); %>
+  </ul>
 <% }); %>
+</div>
+<div class="m_chat">
+  <ul class="list2">
+  </ul>
+</div>
+</div>
 
 <script>
-  
+  // function fn_click()
+  // {
+  //   this.classList.add('hide_yo');
+  //   console.log("ge");
+  //   setTimeout(()=>{
+  //     console.log(this);
+  //     this.classList.add('hide_yo');
+  //   }, 1000);
+  // }
+
+  // const messages = document.querySelectorAll('.message > li');
+
+  // messages.forEach(trigger => trigger.addEventListener('click', fn_click));
+
+
+  $('body').on('click', '.message', function() {
+    $('.list2').empty();
+    $(this).addClass('selected');
+    $('.list2').append($('.selected > li'));
+    // $('.selected').append($('.list2 > li'));
+    setTimeout(()=>{ $('.selected').append($('.list2 > li')); $(this).removeClass('selected'); }, 1000);
+    // $(this).removeClass('selected');
+});
 </script>
+
 
 
 

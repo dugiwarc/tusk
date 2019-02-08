@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
 
 #map {
   margin-top: 3rem;
@@ -51,6 +59,47 @@ button {
       text-align: center;
       text-decoration: none;
       display: inline-block;
+}
+
+.hide
+{
+    display: none;
+}
+
+.message li 
+{
+    display: none;
+}
+
+.selected {
+    background-color:#efefef;
+}
+
+.m_page
+{
+    display: flex;
+}
+
+ul
+{
+    list-style: none;
+}
+
+.m_window
+{
+    display: flex;
+    align-self: center;
+    height: 300px;
+    width: 600px;
+    background: ivory;
+}
+
+.m_contacts
+{
+    height: 300px;
+    background: olivedrab;
+    width: 25%;
+    overflow: auto;
 }
 
 #message:hover {
