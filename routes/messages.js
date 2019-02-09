@@ -26,6 +26,7 @@ router.post("/users/:id/messages", function (req, res) {
         } else {
             Message.create(req.body.message, async function (err, message) {
                 if (err) {
+                    
                     console.log(err);
                 } else {
                     let newNotification = {
