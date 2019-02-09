@@ -29,7 +29,7 @@ var userRoutes      = require('./routes/users'),
 
 var app = express();
 
-mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
+// mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
 
 // a line we will see all the time
 app.use(bodyParser.urlencoded({extended: true}));
