@@ -30,23 +30,23 @@ var userRoutes      = require('./routes/users'),
 
 var app = express();
 
-// mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
-mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/tusky", function (err, client) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/tusky", {useNewUrlParser:true});
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/tusky", function (err, client) {
+//   if (err) {
+//     console.log(err);
+//     process.exit(1);
+//   }
 
-  // Save database object from the callback for reuse.
-  db = client.db();
-  console.log("Database connection ready");
+//   // Save database object from the callback for reuse.
+//   db = client.db();
+//   console.log("Database connection ready");
 
-  // Initialize the app.
-  var server = app.listen(process.env.PORT || 8080, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-  });
-});
+//   // Initialize the app.
+//   var server = app.listen(process.env.PORT || 8080, function () {
+//     var port = server.address().port;
+//     console.log("App now running on port", port);
+//   });
+// });
 // a line we will see all the time
 app.use(bodyParser.urlencoded({extended: true}));
 // so that we avoid adding .ejs when rendering a page
