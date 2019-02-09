@@ -58,6 +58,22 @@ width: 500px;
   color: grey;
 }
 
+.list2
+{
+  min-height: 200px;
+}
+
+.m_chat
+{
+  position: relative;
+}
+
+.list2 li:last-child
+{
+  position: absolute;
+  bottom: 0px;
+}
+
 .table_head {
       font-family: monospace;
       display: flex;

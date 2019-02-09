@@ -1,11 +1,9 @@
-require('dotenv').config();
-
-
 var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 var geocodingClient = mbxGeocoding({ accessToken: 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg' });
 var express       = require('express');
 var router        = express.Router();
 var passport      = require('passport');
+var keyPublishable = 'pk_test_K3VJ6ZLvLKdhLaJTglAd65Qk';
 var async         = require('async');
 var Enquiry       = require('../models/enquiry');
 var nodemailer    = require('nodemailer');

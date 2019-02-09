@@ -26,8 +26,8 @@ var upload = multer({ storage: storage, fileFilter: imageFilter});
 var cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: 'dugiwarc',
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_key: '266892371552875',
+  api_secret: 'KPuc3ggLVjzoQSQMAhgLxEt4p8k'
 });
 
 // finds all favors and outputs them on the page

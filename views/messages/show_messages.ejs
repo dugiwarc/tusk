@@ -2,9 +2,8 @@
 		<div class="search_bar">
             <form action="/users" method="get" class="">
                 <input type="text" name="search" placeholder="User search...">
-                <input type="submit" value="search" class="button">
             </form>
-            <h1>My messages</h1>
+            <h1 id="id-checkbox">My messages</h1>
     </div>
 
 <% var lst = [] %>
@@ -50,14 +49,14 @@
         <% if((message.sender.id.equals(hombre.id) && message.receiver.id.equals(currentUser._id)) || (message.sender.id.equals(currentUser._id) && message.receiver.id.equals(hombre.id))){ %>
           <li><%= message.text %></li>
         <% } %>
-        <% }); %>
-        <li>        <form action="/users/<%= hombre.id %>/messages" method="post">
+    <% }); %>
+        <li><form class="add-item" action="/users/<%= hombre.id %>/messages" method="post">
         <input type="text" name="message[text]"  placeholder="text">
-        <button>Submit</button>
+        <button type="submit" value="+ Add Item"></button>
       </form></li>
         </ul>
 
-<% }); %>
+  <% }); %>
 </div>
 <div class="m_chat">
   <ul class="list2">
@@ -66,27 +65,56 @@
 </div>
 
 <script>
-  // function fn_click()
-  // {
-  //   this.classList.add('hide_yo');
-  //   console.log("ge");
-  //   setTimeout(()=>{
-  //     console.log(this);
-  //     this.classList.add('hide_yo');
-  //   }, 1000);
-  // }
+const addItems = document.querySelector('.add-item');
+const itemsList = document.querySelector('.list2');
+var items = [];
 
-  // const messages = document.querySelectorAll('.message > li');
+$('body').on('submit', addItems, function(event){
+  const text = $('[name^=message]');
+//   $('td[name=tcol1]') // matches exactly 'tcol1'
 
-  // messages.forEach(trigger => trigger.addEventListener('click', fn_click));
+// $('td[name^=tcol]') // matches those that begin with 'tcol'
+
+// $('td[name$=tcol]') // matches those that end with 'tcol'
+
+// $('td[name*=tcol]') // matches those that contain 'tcol'
+  event.preventDefault();
+    const item = {
+      text: text,
+      done: false
+    };
+    console.log(text[1].value);
+    items.push(text[1].value);
+    populateList(items, itemsList);
+    $('.add-item').trigger("reset");
+  });
+
+  function populateList(plates = [], platesList)
+  {
+    platesList.innerHTML = plates.map((plate, i)=>{
+      return `
+        <li>
+          ${plate.text}
+        </li>
+      `;
+    }).join('');
+  }
+
+
 
   $('body').on('click', '.message', function() {
+    items = [];
     $('.list2').empty();
     $(this).addClass('selected');
     // $('.list2').append($('.selected > li'));
     $(".selected > li")
       .clone()
       .appendTo(".list2");
+      const msg_log = $(".selected > li");
+      for(i = 0; i<4; i++){
+        items.push(msg_log[i]);
+      }
+
     // $('.selected').append($('.list2 > li'));
     // setTimeout(()=>{ $('.selected').append($('.list2 > li')); $(this).removeClass('selected'); }, 1000);
     $(this).removeClass('selected');

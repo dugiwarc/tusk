@@ -85,7 +85,8 @@ h2 {
   <ul class="plates">
     <li>Loading Tapas...</li>
   </ul>
-  <form class="add-items">
+  <% var honey = []%>
+  <form class="add-items" action="/" method="post">
     <input type="text" name="item" placeholder="Item Name" required>
     <input type="submit" value="+ Add Item">
   </form>
@@ -107,6 +108,7 @@ h2 {
       text,
       done : false
     };
+    console.log('jj'+text);
     items.push(item);
     populateList(items, itemsList);
     // when adding an item we store it in the localStorage and then turn it in one big string

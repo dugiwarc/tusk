@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 var express         = require('express'),
     bodyParser      = require('body-parser'),
     mongoose        = require('mongoose'),
@@ -14,11 +12,11 @@ var express         = require('express'),
     Notification    = require('./models/notification'),
     socket          = require('socket.io'),
     flash           = require('connect-flash');
-    keyPublishable  = process.env.PUBLISHABLE_KEY,
-    keySecret       = process.env.SECRET_KEY,
+    keyPublishable  = 'pk_test_K3VJ6ZLvLKdhLaJTglAd65Qk',
+    keySecret       = 'sk_test_97z59dQM80mu9pVrQKxwaWyD',
     stripe          = require('stripe')(keySecret),
     mbxGeocoding    = require('@mapbox/mapbox-sdk/services/geocoding'),
-    geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
+    geocodingClient = mbxGeocoding({ accessToken: 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg' });
 
 
 var userRoutes      = require('./routes/users'),

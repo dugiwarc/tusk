@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 
 var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 var geocodingClient = mbxGeocoding({ accessToken: 'pk.eyJ1IjoiZHVnaXdhcmMiLCJhIjoiY2pydDdmdjFtMGZlNjRhdGNreWQ1aW5mZSJ9.IJrnij1QFJbk2r_618xlUg' });
@@ -33,8 +31,8 @@ var upload = multer({ storage: storage, fileFilter: imageFilter});
 var cloudinary = require('cloudinary');
 cloudinary.config({
   cloud_name: 'dugiwarc',
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_key: '266892371552875',
+  api_secret: 'KPuc3ggLVjzoQSQMAhgLxEt4p8k'
 });
 
 // finds all users and outputs them on the page
