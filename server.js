@@ -33,6 +33,8 @@ var app = express();
 
 // mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
 // mongoose.connect("mongodb://tomoshimi:3ZZkgf8hcFcfjBL@ds159624.mlab.com:59624/shop_app", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://tomoshimi:atlas486711@cluster0-pdqjk.mongodb.net/test?retryWrites=true");
+
 
 // a line we will see all the time
 app.use(bodyParser.urlencoded({extended: true}));
@@ -120,9 +122,6 @@ app.post('/charge', function (req, res) {
     .then(charge => res.render('charge'));
 });
 
-const PORT = process.env.PORT || 5000;
-
-
-app.listen(PORT, function () {
-  console.log("App is running on port " + port);
+app.listen(process.env.PORT || 3000, function () {
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
