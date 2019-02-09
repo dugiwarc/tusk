@@ -1,4 +1,4 @@
-require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
+require('dotenv').config();
 
 var express         = require('express'),
     bodyParser      = require('body-parser'),
@@ -13,7 +13,7 @@ var express         = require('express'),
     Conversation    = require('./models/conversation'),
     Notification    = require('./models/notification'),
     socket          = require('socket.io'),
-    flash           = require('connect-flash'),
+    flash           = require('connect-flash');
     keyPublishable  = process.env.PUBLISHABLE_KEY,
     keySecret       = process.env.SECRET_KEY,
     stripe          = require('stripe')(keySecret),
@@ -31,10 +31,7 @@ var userRoutes      = require('./routes/users'),
 
 var app = express();
 
-// mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
-// mongoose.connect("mongodb://tomoshimi:3ZZkgf8hcFcfjBL@ds159624.mlab.com:59624/shop_app", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://tomoshimi:atlas486711@cluster0-pdqjk.mongodb.net/test?retryWrites=true");
-
+mongoose.connect("mongodb://localhost:27017/tusky", {useNewUrlParser:true});
 
 // a line we will see all the time
 app.use(bodyParser.urlencoded({extended: true}));
@@ -122,6 +119,6 @@ app.post('/charge', function (req, res) {
     .then(charge => res.render('charge'));
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+app.listen(process.env.PORT || 3000, process.env.IP, function(){
+  console.log("The Tusk Server has started...");
 });

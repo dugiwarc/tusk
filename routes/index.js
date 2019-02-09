@@ -1,5 +1,4 @@
-require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
-
+require('dotenv').config();
 
 
 var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -8,7 +7,6 @@ var express       = require('express');
 var router        = express.Router();
 var passport      = require('passport');
 var async         = require('async');
-var keyPublishable    = process.env.PUBLISHABLE_KEY;
 var Enquiry       = require('../models/enquiry');
 var nodemailer    = require('nodemailer');
 var User          = require('../models/user');
