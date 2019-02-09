@@ -1,4 +1,5 @@
-require('dotenv').config();
+require('dotenv').config({ silent: process.env.NODE_ENV === 'production' });
+
 
 
 var mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
